@@ -21,7 +21,7 @@ export default function SignUp({ onSuccess }: SignUpProps) {
     setError('');
 
     try {
-      const response = await fetch('https://7cvccltb-5000.inc1.devtunnels.ms/api/users/signup', {
+      const response = await fetch('https://api.b2bbusineesleads.shop/api/users/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

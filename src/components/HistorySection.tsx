@@ -19,7 +19,7 @@ export default function HistorySection() {
           return;
         }
 
-        const response = await axios.post("https://7cvccltb-5000.inc1.devtunnels.ms/api/data/get-scraped-data", {
+        const response = await axios.post("https://api.b2bbusineesleads.shop/api/data/get-scraped-data", {
           userToken,
         });
 
@@ -68,7 +68,7 @@ export default function HistorySection() {
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(filteredData);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "ScrapedData");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "LeadsData");
     XLSX.writeFile(workbook, `${selectedKeyword}.xlsx`);
   };
 
@@ -102,7 +102,7 @@ export default function HistorySection() {
 
   return (
     <div className="p-4 max-w-4xl mx-auto">
-      <h2 className="text-xl font-bold mb-4">Scraped Data History</h2>
+      <h2 className="text-xl font-bold mb-4">Leads Data History</h2>
 
       {/* Dropdown to Select Keyword */}
       {history.length > 0 && (

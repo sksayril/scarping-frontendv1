@@ -3,10 +3,12 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import CreditAlert from './components/CreditAlert';
+import LandingPage from './components/Landingpage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
   const [user, setUser] = useState<{ userName: string; credits: number } | null>(null);
   const [showCreditAlert, setShowCreditAlert] = useState(false);
 
@@ -30,9 +32,16 @@ function App() {
     localStorage.removeItem('user');
     setIsLoggedIn(false);
     setUser(null);
+    setShowAuth(false);
   };
 
-  if (!isLoggedIn) {
+  // Show landing page if not authenticated and not showing auth forms
+  if (!isLoggedIn && !showAuth) {
+    return <LandingPage onGetStarted={() => setShowAuth(true)} />;
+  }
+
+  // Show auth forms
+  if (!isLoggedIn && showAuth) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
@@ -52,6 +61,7 @@ function App() {
     );
   }
 
+  // Show dashboard for authenticated users
   return (
     <>
       {showCreditAlert && <CreditAlert onClose={() => setShowCreditAlert(false)} />}
@@ -60,4 +70,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
