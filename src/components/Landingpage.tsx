@@ -1,11 +1,34 @@
 import React from 'react';
-import { MapPin, Users, BadgeCheck, ArrowRight, Search, Building, Database, Shield } from 'lucide-react';
+import { MapPin, Users, BadgeCheck, ArrowRight, Search, Building, Database, Shield, Monitor, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 
 interface LandingPageProps {
   onGetStarted: () => void;
 }
 
 export default function LandingPage({ onGetStarted }: LandingPageProps) {
+  // For the screenshots carousel/slider
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Sample screenshots - replace these placeholder URLs with your actual screenshots
+  const screenshots = [
+    "./leadssecondimage.jpg", // Replace with your actual screenshot paths
+    "./historyimage3.jpg",
+    "./userprofileimage1.jpg",
+  ];
+  
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === screenshots.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+  
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === 0 ? screenshots.length - 1 : prevIndex - 1
+    );
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -37,6 +60,79 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
                 Watch Demo
               </button> */}
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Screenshot Showcase Section */}
+      <div className="py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">See Our Platform in Action</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Discover how easy it is to find, filter, and export high-quality B2B leads with our intuitive platform.
+            </p>
+          </div>
+          
+          {/* Screenshots Carousel */}
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            {/* Main Screenshot Display */}
+            <div className="relative aspect-video bg-gray-100 overflow-hidden">
+              <img 
+                src={screenshots[currentImageIndex]} 
+                alt={`Platform screenshot ${currentImageIndex + 1}`}
+                className="w-full h-full object-cover"
+              />
+              
+              {/* Screenshot Description Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                <h3 className="text-white text-xl font-semibold mb-2">
+                  {currentImageIndex === 0 && "Search & Filter Business Leads"}
+                  {currentImageIndex === 1 && "View Detailed Business Profiles"}
+                  {currentImageIndex === 2 && "Export Data in Multiple Formats"}
+                </h3>
+                <p className="text-white/80">
+                  {currentImageIndex === 0 && "Easily find the right businesses using our powerful search and filtering tools."}
+                  {currentImageIndex === 1 && "Access comprehensive information about each business including contacts and location data."}
+                  {currentImageIndex === 2 && "Export your selected leads in CSV, Excel, or other formats with a single click."}
+                </p>
+              </div>
+            </div>
+            
+            {/* Navigation Arrows */}
+            <button 
+              onClick={prevImage}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-blue-600 p-3 rounded-full shadow-lg transform transition-transform hover:scale-110"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button 
+              onClick={nextImage}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-blue-600 p-3 rounded-full shadow-lg transform transition-transform hover:scale-110"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+            
+            {/* Screenshot Indicators */}
+            <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-2">
+              {screenshots.map((_, index) => (
+                <button 
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all ${
+                    currentImageIndex === index ? 'bg-white scale-125' : 'bg-white/50'
+                  }`}
+                  aria-label={`View screenshot ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+          
+          {/* Caption Under Screenshots */}
+          <div className="mt-8 text-center">
+            <p className="text-gray-500 italic">
+              Our easy-to-use platform puts verified business leads at your fingertips
+            </p>
           </div>
         </div>
       </div>
@@ -80,8 +176,60 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </div>
 
+      {/* How It Works Section */}
+      <div className="py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">How It Works</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Getting high-quality B2B leads is simple with our platform
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="relative">
+                <div className="mx-auto w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center mb-6 relative z-10">
+                  <span className="text-blue-600 text-3xl font-bold">1</span>
+                </div>
+                <div className="hidden md:block absolute top-12 left-full w-full h-1 bg-blue-100 -z-0"></div>
+              </div>
+              <h3 className="text-xl font-semibold mb-4">Purchase Access</h3>
+              <p className="text-gray-600">
+                Make a one-time payment of ₹199 to gain immediate access to our verified business leads.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="relative">
+                <div className="mx-auto w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center mb-6 relative z-10">
+                  <span className="text-blue-600 text-3xl font-bold">2</span>
+                </div>
+                <div className="hidden md:block absolute top-12 left-full w-full h-1 bg-blue-100 -z-0"></div>
+              </div>
+              <h3 className="text-xl font-semibold mb-4">Browse & Filter</h3>
+              <p className="text-gray-600">
+                Use our intuitive dashboard to search, filter, and find the exact business leads you need.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="relative">
+                <div className="mx-auto w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center mb-6 relative z-10">
+                  <span className="text-blue-600 text-3xl font-bold">3</span>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mb-4">Export & Use</h3>
+              <p className="text-gray-600">
+                Download your selected leads in your preferred format and start reaching out to potential clients.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Pricing Section */}
-      <div className="py-24 px-4">
+      <div className="py-24 px-4 bg-gray-50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Simple, Transparent Pricing</h2>
@@ -128,19 +276,6 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           </div>
         </div>
       </div>
-
-      {/* Trust Section */}
-      {/* <div className="bg-gray-50 py-16 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-8">Trusted by Growing Businesses</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-50">
-            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200&h=100&fit=crop&crop=entropy&q=80" alt="Company logo" className="h-12 object-contain mx-auto" />
-            <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=200&h=100&fit=crop&crop=entropy&q=80" alt="Company logo" className="h-12 object-contain mx-auto" />
-            <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=200&h=100&fit=crop&crop=entropy&q=80" alt="Company logo" className="h-12 object-contain mx-auto" />
-            <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=200&h=100&fit=crop&crop=entropy&q=80" alt="Company logo" className="h-12 object-contain mx-auto" />
-          </div>
-        </div> */}
-      {/* </div> */}
     </div>
   );
 }
