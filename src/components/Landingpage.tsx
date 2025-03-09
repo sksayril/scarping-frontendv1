@@ -1,7 +1,9 @@
 import React from 'react';
 import { MapPin, Users, BadgeCheck, ArrowRight, Search, Building, Database, Shield, Monitor, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
-
+import image1 from '../assets/leadssecondimage.jpg';
+import image2 from '../assets/historyimage3.jpg';   
+import image3 from '../assets/userprofileimage1.jpg';
 interface LandingPageProps {
   onGetStarted: () => void;
 }
@@ -12,9 +14,9 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
   
   // Sample screenshots - replace these placeholder URLs with your actual screenshots
   const screenshots = [
-    "./leadssecondimage.jpg", // Replace with your actual screenshot paths
-    "./historyimage3.jpg",
-    "./userprofileimage1.jpg",
+    image1, // Replace with your actual screenshot paths
+    image2,
+    image3,
   ];
   
   const nextImage = () => {
