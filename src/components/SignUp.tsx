@@ -35,7 +35,7 @@ export default function SignUp({ onSuccess }: SignUpProps) {
 
       onSuccess();
     } catch (err) {
-      setError('Failed to sign up. Please try again.');
+      setError('Failed to sign up. Email Alredy Exist or Invalid Data Please Try Diffrent Email');
     } finally {
       setIsLoading(false);
     }
